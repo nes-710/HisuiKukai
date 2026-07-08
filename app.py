@@ -10,7 +10,7 @@ from services.submission_service import (
     count_participants,
     get_submissions,
 )
-from services.eiso_service import get_eiso_data
+from services.eiso_service import get_eiso_data, group_and_shuffle_eiso
 
 app = Flask(__name__)
 
@@ -134,11 +134,12 @@ def eiso(contest_id):
 
     contest = get_contest(contest_id)
     submissions = get_eiso_data(contest_id)
+    grouped_eiso = group_and_shuffle_eiso(submissions)
 
     return render_template(
         "eiso.html",
         contest=contest,
-        submissions=submissions,
+        grouped_eiso=grouped_eiso,
     )
 
 if __name__ == "__main__":

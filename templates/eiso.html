@@ -10,30 +10,24 @@
 
 <h2>題①「{{ contest["theme1"] }}」</h2>
 
-{% for submission in submissions %}
-    {% if submission["theme"] == "theme1" %}
-        <p>{{ submission["poem"] }}</p>
-    {% endif %}
+{% for poem in grouped_eiso["theme1"] %}
+    <p>{{ poem }}</p>
 {% endfor %}
 
 <hr>
 
 <h2>題②「{{ contest["theme2"] }}」</h2>
 
-{% for submission in submissions %}
-    {% if submission["theme"] == "theme2" %}
-        <p>{{ submission["poem"] }}</p>
-    {% endif %}
+{% for poem in grouped_eiso["theme2"] %}
+    <p>{{ poem }}</p>
 {% endfor %}
 
 <hr>
 
 <h2>雑詠</h2>
 
-{% for submission in submissions %}
-    {% if submission["theme"] == "free" %}
-        <p>{{ submission["poem"] }}</p>
-    {% endif %}
+{% for poem in grouped_eiso["free"] %}
+    <p>{{ poem }}</p>
 {% endfor %}
 
 <p>
