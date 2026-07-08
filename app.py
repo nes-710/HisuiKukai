@@ -6,6 +6,7 @@ from services.contest_service import (
     get_status_label,
     update_contest_status,
     delete_contest,
+    close_contest_if_deadline_passed,
 )
 from services.submission_service import (
     create_submission,
@@ -74,6 +75,9 @@ def contest(contest_id):
 
     contest = get_contest(contest_id)
 
+    close_contest_if_deadline_passed(contest)
+    contest = get_contest(contest_id)
+
     status_label = get_status_label(contest["status"])
     participant_count = count_participants(contest_id)
 
@@ -88,6 +92,10 @@ def contest(contest_id):
 def submit(contest_id):
 
     contest = get_contest(contest_id)
+
+    close_contest_if_deadline_passed(contest)
+    contest = get_contest(contest_id)
+
     if contest["status"] != "accepting":
         return render_template(
             "submit_closed.html",

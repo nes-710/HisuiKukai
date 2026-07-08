@@ -1,5 +1,5 @@
 from database import get_connection
-
+from datetime import datetime
 
 def create_contest(
     contest_no,
@@ -132,3 +132,17 @@ def delete_contest(contest_id):
 
     conn.commit()
     conn.close()
+
+def close_contest_if_deadline_passed(contest):
+
+    if contest["status"] != "accepting":
+        return
+
+    if not contest["deadline_at"]:
+        return
+
+    deadline = datetime.fromisoformat(contest["deadline_at"])
+    now = datetime.now()
+
+    if now >= deadline:
+        update_contest_status(contest["id"], "closed")
