@@ -55,12 +55,26 @@
 
 <h2>句会報用テキスト</h2>
 
-<textarea rows="20" readonly>{{ report_text }}</textarea>
+<textarea id="report-text" rows="20" readonly>{{ report_text }}</textarea>
+
+<br>
+
+<button type="button" onclick="copyText('report-text')">
+句会報用テキストをコピー
+</button>
 
 {% endif %}
 
 <p>
 <a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
 </p>
+
+<script>
+function copyText(id) {
+    const element = document.getElementById(id);
+    element.select();
+    document.execCommand("copy");
+}
+</script>
 
 {% endblock %}
