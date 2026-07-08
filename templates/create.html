@@ -1,23 +1,32 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>新しい句会</title>
+<h1>新しい句会</h1>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<form method="post">
 
-</head>
-<body>
+<h2>題①</h2>
 
-<div class="container">
+題<br>
+<input type="text" name="theme1"><br><br>
 
-<h1>新しい句会を作成</h1>
+選者<br>
+<input type="text" name="judge1"><br><br>
 
-<p>この画面は現在開発中です。</p>
+<hr>
 
-<a href="/">トップへ戻る</a>
+<h2>題②</h2>
 
-</div>
+題<br>
+<input type="text" name="theme2"><br><br>
 
-</body>
-</html>
+選者<br>
+<input type="text" name="judge2"><br><br>
+
+<hr>
+
+<h2>雑詠</h2>
+
+共選者（nes以外）<br>
+<input type="text" name="free_judge"><br><br>
+
+<input type="submit" value="句会を作成">
+
+</form>
