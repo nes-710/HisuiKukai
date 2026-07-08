@@ -25,6 +25,24 @@
 状態：<strong>{{ status_label }}</strong>
 </p>
 
+<h2>状態変更</h2>
+
+<form method="post" action="/contest/{{ contest['id'] }}/status">
+
+    <select name="status">
+        <option value="created">作成済み</option>
+        <option value="accepting">投句受付中</option>
+        <option value="closed">投句締切</option>
+        <option value="selection">選句期間中</option>
+        <option value="finished">終了</option>
+    </select>
+
+    <button type="submit">
+        状態を変更
+    </button>
+
+</form>
+
 <p>
 投句者数：<strong>{{ participant_count }}</strong>人
 </p>

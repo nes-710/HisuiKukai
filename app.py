@@ -4,6 +4,8 @@ from services.contest_service import (
     get_all_contests,
     get_contest,
     get_status_label,
+    update_contest_status,
+    delete_contest,
 )
 from services.submission_service import (
     create_submission,
@@ -201,6 +203,17 @@ def selection(contest_id):
         raw_text=raw_text,
         report_text=report_text,
         selected_theme=selected_theme,
+    )
+
+@app.route("/contest/<int:contest_id>/status", methods=["POST"])
+def change_status(contest_id):
+
+    status = request.form["status"]
+
+    update_contest_status(contest_id, status)
+
+    return redirect(
+        url_for("contest", contest_id=contest_id)
     )
 
 if __name__ == "__main__":
