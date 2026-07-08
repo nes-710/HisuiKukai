@@ -30,6 +30,26 @@
     <p>{{ poem }}</p>
 {% endfor %}
 
+<hr>
+
+<h2>コピー用テキスト</h2>
+
+<hr>
+
+<h2>コピー用テキスト</h2>
+
+<h3>題①「{{ contest["theme1"] }}」</h3>
+
+<textarea rows="15" readonly>{{ theme1_text }}</textarea>
+
+<h3>題②「{{ contest["theme2"] }}」</h3>
+
+<textarea rows="15" readonly>{{ theme2_text }}</textarea>
+
+<h3>雑詠</h3>
+
+<textarea rows="15" readonly>{{ free_text }}</textarea>
+
 <p>
 <a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
 </p>
