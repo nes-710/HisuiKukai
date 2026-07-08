@@ -1,22 +1,17 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
+{% block title %}
+HisuiKukai
+{% endblock %}
 
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <title>HisuiKukai</title>
-</head>
-
-<body>
+{% block content %}
 
 <h1>翡翠句会</h1>
 
 <p>
-<a href="/create">新しい句会を作成</a>
+<a href="/create">
+新しい句会を作成
+</a>
 </p>
 
 <hr>
@@ -32,7 +27,7 @@
 <li>
 
 <a href="/contest/{{ contest['id'] }}">
-    {{ contest["contest_no"] }} 翡翠句会
+{{ contest["contest_no"] }} 翡翠句会
 </a>
 
 （{{ contest["status"] }}）
@@ -49,6 +44,4 @@
 
 {% endif %}
 
-</body>
-
-</html>
+{% endblock %}

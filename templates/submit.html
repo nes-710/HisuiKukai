@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
 
 <html>
 
@@ -19,7 +21,7 @@
 
 <h2>投句フォーム</h2>
 
-<form>
+<form method="post">
 
 <h3>筆名</h3>
 
@@ -36,39 +38,39 @@
 <h2>題①「{{ contest["theme1"] }}」</h2>
 
 一句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="theme1_poem1" rows="2"></textarea>
 
 二句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="theme1_poem2" rows="2"></textarea>
 
 三句目<br>
-<textarea rows="2" cols="60"></textarea>
+<textarea name="theme1_poem3" rows="2"></textarea>
 
 <hr>
 
 <h2>題②「{{ contest["theme2"] }}」</h2>
 
 一句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="theme2_poem1" rows="2"></textarea>
 
 二句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="theme2_poem2" rows="2"></textarea>
 
 三句目<br>
-<textarea rows="2" cols="60"></textarea>
+<textarea name="theme2_poem3" rows="2"></textarea>
 
 <hr>
 
 <h2>雑詠</h2>
 
 一句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="free_poem1" rows="2"></textarea>
 
 二句目<br>
-<textarea rows="2" cols="60"></textarea><br><br>
+<textarea name="free_poem2" rows="2"></textarea>
 
 三句目<br>
-<textarea rows="2" cols="60"></textarea>
+<textarea name="free_poem3" rows="2"></textarea>
 
 <hr>
 
@@ -95,3 +97,5 @@ document.querySelectorAll("textarea").forEach(function(textarea) {
 </body>
 
 </html>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<header>
+
+<h1>
+
+<a href="/">
+HisuiKukai
+</a>
+
+</h1>
+
+</header>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        {% block title %}
+        HisuiKukai
+        {% endblock %}
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+{% block content %}
+{% endblock %}
+
+</body>
+
+</html>

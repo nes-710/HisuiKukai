@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %}
+{{ contest["contest_no"] }} 翡翠句会
+{% endblock %}
+
+{% block content %}
 
 <html>
 
@@ -72,3 +78,5 @@
 </body>
 
 </html>
+
+{% endblock %}

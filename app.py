@@ -60,10 +60,14 @@ def contest(contest_id):
         status_label=status_label,
     )
 
-@app.route("/contest/<int:contest_id>/submit")
+@app.route("/contest/<int:contest_id>/submit", methods=["GET", "POST"])
 def submit(contest_id):
 
     contest = get_contest(contest_id)
+
+    if request.method == "POST":
+        print(request.form)
+        return "投句を受け付けました。"
 
     return render_template(
         "submit.html",
