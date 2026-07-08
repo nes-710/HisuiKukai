@@ -44,7 +44,7 @@
 
 {% if matched %}
 
-<h2>照合できた句</h2>
+<h2>照合できた句：{{ matched|length }}句</h2>
 
 <ul>
 {% for item in matched %}
@@ -59,7 +59,7 @@
 
 {% if unmatched %}
 
-<h2>照合できなかった行</h2>
+<h2>照合できなかった行：{{ unmatched|length }}件</h2>
 
 <p class="warning">
 以下の行は句として照合できませんでした。選評やメモであれば問題ありません。
@@ -76,7 +76,7 @@
 
 {% if report_text %}
 
-<h2>句会報用テキスト</h2>
+<h2>句会報用テキスト（{{ matched|length }}句）</h2>
 
 <textarea id="report-text" rows="20" readonly>{{ report_text }}</textarea>
 
