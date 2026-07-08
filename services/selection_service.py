@@ -80,9 +80,16 @@ def create_selection_report_text(matched):
     lines = []
 
     for item in matched:
-        lines.append(f"【{item['rank']}】")
+
+        rank = item["rank"]
+
+        if rank == "平":
+            author_line = f"／{item['pen_name']}"
+        else:
+            author_line = f"／{item['pen_name']}（{rank}）"
+
         lines.append(item["poem"])
-        lines.append(f"作者：{item['pen_name']}")
+        lines.append(author_line)
         lines.append("")
 
     return "\n".join(lines)
