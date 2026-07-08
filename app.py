@@ -85,7 +85,12 @@ def contest(contest_id):
 def submit(contest_id):
 
     contest = get_contest(contest_id)
-
+    if contest["status"] != "accepting":
+        return render_template(
+            "submit_closed.html",
+            contest=contest,
+        )
+    
     if request.method == "POST":
 
         pen_name = request.form["pen_name"]
