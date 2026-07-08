@@ -103,6 +103,20 @@
 
 <li>句会報生成</li>
 
+<hr>
+
+<h2>危険な操作</h2>
+
+<form method="post"
+      action="/contest/{{ contest['id'] }}/delete"
+      onsubmit="return confirm('この句会を削除します。投稿・選句データも削除されます。本当によろしいですか？');">
+
+    <button type="submit" class="danger-button">
+        この句会を削除
+    </button>
+
+</form>
+
 </ul>
 
 <p>

@@ -216,5 +216,12 @@ def change_status(contest_id):
         url_for("contest", contest_id=contest_id)
     )
 
+@app.route("/contest/<int:contest_id>/delete", methods=["POST"])
+def delete(contest_id):
+
+    delete_contest(contest_id)
+
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
     app.run(debug=True)
