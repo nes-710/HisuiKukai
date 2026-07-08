@@ -30,3 +30,19 @@ def create_contest(
 
     conn.commit()
     conn.close()
+
+def get_all_contests():
+
+    conn = get_connection()
+
+    contests = conn.execute(
+        """
+        SELECT *
+        FROM contests
+        ORDER BY created_at DESC
+        """
+    ).fetchall()
+
+    conn.close()
+
+    return contests

@@ -1,12 +1,18 @@
 from flask import Flask, render_template, request
-from services.contest_service import create_contest
+from services.contest_service import create_contest, get_all_contests
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+
+    contests = get_all_contests()
+
+    return render_template(
+        "index.html",
+        contests=contests
+    )
 
 
 @app.route("/create", methods=["GET", "POST"])

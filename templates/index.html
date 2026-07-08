@@ -1,37 +1,45 @@
 <!DOCTYPE html>
-<html lang="ja">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
     <title>HisuiKukai</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
+
 <body>
 
-<div class="container">
+<h1>翡翠句会</h1>
 
-    <h1>HisuiKukai</h1>
+<p>
+<a href="/create">新しい句会を作成</a>
+</p>
 
-    <p>翡翠句会運営システム</p>
+<hr>
 
-    <div class="menu">
+<h2>句会一覧</h2>
 
-        <a class="button" href="/create">
-            新しい句会を作成
-        </a>
+{% if contests %}
 
-        <a class="button" href="#">
-            過去の句会一覧
-        </a>
+<ul>
 
-        <a class="button" href="#">
-            システム設定
-        </a>
+{% for contest in contests %}
 
-    </div>
+<li>
 
-</div>
+{{ contest["contest_no"] }} 翡翠句会
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>まだ句会はありません。</p>
+
+{% endif %}
 
 </body>
+
 </html>
