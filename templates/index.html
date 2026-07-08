@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>HisuiKukai</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 
-<h1>HisuiKukai</h1>
+<div class="container">
 
-<p>翡翠句会運営システム</p>
+    <h1>HisuiKukai</h1>
+
+    <p>翡翠句会運営システム</p>
+
+    <div class="menu">
+
+        <a class="button" href="/create">
+            新しい句会を作成
+        </a>
+
+        <a class="button" href="#">
+            過去の句会一覧
+        </a>
+
+        <a class="button" href="#">
+            システム設定
+        </a>
+
+    </div>
+
+</div>
 
 </body>
 </html>
