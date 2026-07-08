@@ -1,5 +1,7 @@
 from database import DATABASE
 from flask import Flask, render_template, request, redirect, url_for, send_file
+import os
+import shutil
 from services.contest_service import (
     create_contest,
     get_all_contests,
@@ -264,7 +266,22 @@ def backup():
 @app.route("/restore", methods=["POST"])
 def restore():
 
-    return "復元機能は次のバージョンで実装します。"
+    file = request.files.get("backup_file")
+
+    if not file or file.filename == "":
+        return "バックアップファイルが選択されていません。"
+
+    if not file.filename.endswith(".db"):
+        return "復元できるのは .db ファイルのみです。"
+
+    backup_before_restore = DATABASE + ".before_restore"
+
+    if os.path.exists(DATABASE):
+        shutil.copy2(DATABASE, backup_before_restore)
+
+    file.save(DATABASE)
+
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
