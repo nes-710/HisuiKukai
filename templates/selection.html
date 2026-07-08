@@ -61,7 +61,12 @@
 
 <h2>照合できなかった行</h2>
 
-<ul>
+<p class="warning">
+以下の行は句として照合できませんでした。選評やメモであれば問題ありません。
+句の誤字・表記揺れの場合は、元の詠草と一致するように修正してください。
+</p>
+
+<ul class="unmatched-list">
 {% for line in unmatched %}
 <li>{{ line }}</li>
 {% endfor %}

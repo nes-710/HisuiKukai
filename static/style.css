@@ -69,3 +69,16 @@ textarea[readonly] {
     font-size: 16px;
     line-height: 1.8;
 }
+
+.warning {
+    background: #fff4e5;
+    border-left: 5px solid #c9822b;
+    padding: 12px 16px;
+    border-radius: 6px;
+}
+
+.unmatched-list {
+    background: #fff;
+    padding: 16px 24px;
+    border-radius: 8px;
+}
