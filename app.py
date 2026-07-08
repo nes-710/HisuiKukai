@@ -3,6 +3,7 @@ from services.contest_service import (
     create_contest,
     get_all_contests,
     get_contest,
+    get_status_label,
 )
 
 app = Flask(__name__)
@@ -51,9 +52,12 @@ def contest(contest_id):
 
     contest = get_contest(contest_id)
 
+    status_label = get_status_label(contest["status"])
+
     return render_template(
         "contest.html",
         contest=contest,
+        status_label=status_label,
     )
 
 if __name__ == "__main__":

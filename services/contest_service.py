@@ -63,3 +63,15 @@ def get_contest(contest_id):
     conn.close()
 
     return contest
+
+def get_status_label(status):
+
+    labels = {
+        "created": "作成済み",
+        "accepting": "投句受付中",
+        "closed": "投句締切",
+        "selection": "選句受付中",
+        "finished": "終了",
+    }
+
+    return labels.get(status, status)
