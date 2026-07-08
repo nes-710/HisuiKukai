@@ -44,4 +44,26 @@ HisuiKukai
 
 {% endif %}
 
+<hr>
+
+<h2>バックアップ</h2>
+
+<p>
+<a href="/backup">
+データベースをダウンロード
+</a>
+</p>
+
+<h3>バックアップから復元</h3>
+
+<form method="post" action="/restore" enctype="multipart/form-data">
+
+    <input type="file" name="backup_file" accept=".db">
+
+    <button type="submit">
+        復元する
+    </button>
+
+</form>
+
 {% endblock %}

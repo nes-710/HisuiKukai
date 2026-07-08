@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+from database import DATABASE
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from services.contest_service import (
     create_contest,
     get_all_contests,
@@ -250,6 +251,20 @@ def delete(contest_id):
     delete_contest(contest_id)
 
     return redirect(url_for("index"))
+
+@app.route("/backup")
+def backup():
+
+    return send_file(
+        DATABASE,
+        as_attachment=True,
+        download_name="hisui_backup.db",
+    )
+
+@app.route("/restore", methods=["POST"])
+def restore():
+
+    return "復元機能は次のバージョンで実装します。"
 
 if __name__ == "__main__":
     app.run(debug=True)
