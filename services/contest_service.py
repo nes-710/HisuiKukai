@@ -146,3 +146,19 @@ def close_contest_if_deadline_passed(contest):
 
     if now >= deadline:
         update_contest_status(contest["id"], "closed")
+
+def update_deadline(contest_id, deadline_at):
+
+    conn = get_connection()
+
+    conn.execute(
+        """
+        UPDATE contests
+        SET deadline_at = ?
+        WHERE id = ?
+        """,
+        (deadline_at, contest_id),
+    )
+
+    conn.commit()
+    conn.close()

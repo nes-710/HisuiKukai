@@ -7,6 +7,7 @@ from services.contest_service import (
     update_contest_status,
     delete_contest,
     close_contest_if_deadline_passed,
+    update_deadline,
 )
 from services.submission_service import (
     create_submission,
@@ -227,6 +228,17 @@ def change_status(contest_id):
     status = request.form["status"]
 
     update_contest_status(contest_id, status)
+
+    return redirect(
+        url_for("contest", contest_id=contest_id)
+    )
+
+@app.route("/contest/<int:contest_id>/deadline", methods=["POST"])
+def change_deadline(contest_id):
+
+    deadline_at = request.form["deadline_at"]
+
+    update_deadline(contest_id, deadline_at)
 
     return redirect(
         url_for("contest", contest_id=contest_id)

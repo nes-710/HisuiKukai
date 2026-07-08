@@ -25,6 +25,22 @@
 締切日時：{{ contest["deadline_at"] or "未設定" }}
 </p>
 
+<h2>締切日時変更</h2>
+
+<form method="post" action="/contest/{{ contest['id'] }}/deadline">
+
+    <input
+        type="datetime-local"
+        name="deadline_at"
+        value="{{ contest['deadline_at'] }}"
+    >
+
+    <button type="submit">
+        締切日時を変更
+    </button>
+
+</form>
+
 <p>
 状態：<strong>{{ status_label }}</strong>
 </p>
