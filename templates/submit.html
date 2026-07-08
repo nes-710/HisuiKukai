@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>投句フォーム</title>
+</head>
+
+<body>
+
+<h1>{{ contest["contest_no"] }} 翡翠句会</h1>
+
+<h2>投句フォーム</h2>
+
+<form>
+
+<h3>筆名</h3>
+
+<input type="text" name="pen_name">
+
+<br><br>
+
+<h3>筆名（かな）</h3>
+
+<input type="text" name="pen_name_kana">
+
+<hr>
+
+<h2>題①「{{ contest["theme1"] }}」</h2>
+
+一句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+二句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+三句目<br>
+<textarea rows="2" cols="60"></textarea>
+
+<hr>
+
+<h2>題②「{{ contest["theme2"] }}」</h2>
+
+一句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+二句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+三句目<br>
+<textarea rows="2" cols="60"></textarea>
+
+<hr>
+
+<h2>雑詠</h2>
+
+一句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+二句目<br>
+<textarea rows="2" cols="60"></textarea><br><br>
+
+三句目<br>
+<textarea rows="2" cols="60"></textarea>
+
+<hr>
+
+<input type="submit" value="投句する">
+
+</form>
+
+</body>
+
+</html>

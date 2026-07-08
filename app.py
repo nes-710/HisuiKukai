@@ -60,5 +60,15 @@ def contest(contest_id):
         status_label=status_label,
     )
 
+@app.route("/contest/<int:contest_id>/submit")
+def submit(contest_id):
+
+    contest = get_contest(contest_id)
+
+    return render_template(
+        "submit.html",
+        contest=contest,
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
