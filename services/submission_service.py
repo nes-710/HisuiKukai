@@ -31,3 +31,19 @@ def create_submission(contest_id, pen_name, pen_name_kana, poems):
 
     conn.commit()
     conn.close()
+
+def count_participants(contest_id):
+    conn = get_connection()
+
+    count = conn.execute(
+        """
+        SELECT COUNT(*) AS count
+        FROM participants
+        WHERE contest_id = ?
+        """,
+        (contest_id,),
+    ).fetchone()
+
+    conn.close()
+
+    return count["count"]

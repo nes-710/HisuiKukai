@@ -5,7 +5,7 @@ from services.contest_service import (
     get_contest,
     get_status_label,
 )
-from services.submission_service import create_submission
+from services.submission_service import create_submission, count_participants
 
 app = Flask(__name__)
 
@@ -54,11 +54,13 @@ def contest(contest_id):
     contest = get_contest(contest_id)
 
     status_label = get_status_label(contest["status"])
+    participant_count = count_participants(contest_id)
 
     return render_template(
         "contest.html",
         contest=contest,
         status_label=status_label,
+        participant_count=participant_count,
     )
 
 @app.route("/contest/<int:contest_id>/submit", methods=["GET", "POST"])
