@@ -38,8 +38,20 @@ def get_poem_lookup(contest_id):
 def analyze_selection_text(contest_id, text):
     lookup = get_poem_lookup(contest_id)
 
+    current_rank = "平"
+
     matched = []
     unmatched = []
+
+    rank_words = {
+        "天": "天",
+        "地": "地",
+        "人": "人",
+        "平": "平",
+        "平抜き": "平",
+        "軸": "軸",
+        "軸吟": "軸",
+    }
 
     for line in text.splitlines():
         line = normalize_text(line)
@@ -47,8 +59,17 @@ def analyze_selection_text(contest_id, text):
         if not line:
             continue
 
+        if line in rank_words:
+            current_rank = rank_words[line]
+            continue
+
         if line in lookup:
-            matched.append(lookup[line])
+            item = lookup[line]
+            matched.append({
+                "rank": current_rank,
+                "poem": item["poem"],
+                "pen_name": item["pen_name"],
+            })
         else:
             unmatched.append(line)
 
