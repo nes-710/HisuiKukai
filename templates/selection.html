@@ -51,6 +51,14 @@
 
 {% endif %}
 
+{% if report_text %}
+
+<h2>句会報用テキスト</h2>
+
+<textarea rows="20" readonly>{{ report_text }}</textarea>
+
+{% endif %}
+
 <p>
 <a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
 </p>

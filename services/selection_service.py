@@ -74,3 +74,15 @@ def analyze_selection_text(contest_id, text):
             unmatched.append(line)
 
     return matched, unmatched
+
+def create_selection_report_text(matched):
+
+    lines = []
+
+    for item in matched:
+        lines.append(f"【{item['rank']}】")
+        lines.append(item["poem"])
+        lines.append(f"作者：{item['pen_name']}")
+        lines.append("")
+
+    return "\n".join(lines)
