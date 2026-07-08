@@ -79,3 +79,54 @@ def get_status_label(status):
     }
 
     return labels.get(status, status)
+
+def update_contest_status(contest_id, status):
+
+    conn = get_connection()
+
+    conn.execute(
+        """
+        UPDATE contests
+        SET status = ?
+        WHERE id = ?
+        """,
+        (status, contest_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def delete_contest(contest_id):
+
+    conn = get_connection()
+
+    conn.execute(
+        """
+        DELETE FROM submissions
+        WHERE participant_id IN (
+            SELECT id FROM participants
+            WHERE contest_id = ?
+        )
+        """,
+        (contest_id,),
+    )
+
+    conn.execute(
+        """
+        DELETE FROM participants
+        WHERE contest_id = ?
+        """,
+        (contest_id,),
+    )
+
+    conn.execute(
+        """
+        DELETE FROM contests
+        WHERE id = ?
+        """,
+        (contest_id,),
+    )
+
+    conn.commit()
+    conn.close()
