@@ -97,6 +97,19 @@
 </a>
 </li>
 
+<h2>投稿フォームURL</h2>
+
+<input
+    type="text"
+    id="submit-url"
+    value="{{ request.url_root }}contest/{{ contest['id'] }}/submit"
+    readonly
+>
+
+<button type="button" onclick="copyText('submit-url')">
+    URLをコピー
+</button>
+
 <li>
 <a href="/contest/{{ contest['id'] }}/submissions">
 投稿一覧
@@ -142,5 +155,13 @@
 </body>
 
 </html>
+
+<script>
+function copyText(id) {
+    const element = document.getElementById(id);
+    element.select();
+    document.execCommand("copy");
+}
+</script>
 
 {% endblock %}

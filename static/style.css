@@ -103,3 +103,10 @@ textarea[readonly] {
 .danger-button:hover {
     background: #8f2d2d;
 }
+
+#submit-url {
+    width: 100%;
+    max-width: 700px;
+    padding: 8px;
+    font-size: 15px;
+}
