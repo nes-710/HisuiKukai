@@ -59,3 +59,45 @@ def create_eiso_text(title, poems):
     lines.extend(poems)
 
     return "\n".join(lines)
+
+def get_judge_eiso_texts(contest, grouped_eiso):
+
+    judge_texts = []
+
+    judge_texts.append({
+        "judge": contest["judge1"],
+        "theme_title": contest["theme1"],
+        "text": create_eiso_text(
+            contest["theme1"],
+            grouped_eiso["theme1"],
+        ),
+    })
+
+    judge_texts.append({
+        "judge": contest["judge2"],
+        "theme_title": contest["theme2"],
+        "text": create_eiso_text(
+            contest["theme2"],
+            grouped_eiso["theme2"],
+        ),
+    })
+
+    judge_texts.append({
+        "judge": contest["free_judge"],
+        "theme_title": "雑詠",
+        "text": create_eiso_text(
+            "雑詠",
+            grouped_eiso["free"],
+        ),
+    })
+
+    judge_texts.append({
+        "judge": "nes",
+        "theme_title": "雑詠",
+        "text": create_eiso_text(
+            "雑詠",
+            grouped_eiso["free"],
+        ),
+    })
+
+    return judge_texts

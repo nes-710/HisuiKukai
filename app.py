@@ -14,6 +14,7 @@ from services.eiso_service import (
     get_eiso_data,
     group_and_shuffle_eiso,
     create_eiso_text,
+    get_judge_eiso_texts,
 )
 
 app = Flask(__name__)
@@ -155,6 +156,11 @@ def eiso(contest_id):
         grouped_eiso["free"],
     )
 
+    judge_eiso_texts = get_judge_eiso_texts(
+        contest,
+        grouped_eiso,
+    )
+
     return render_template(
         "eiso.html",
         contest=contest,
@@ -162,6 +168,7 @@ def eiso(contest_id):
         theme1_text=theme1_text,
         theme2_text=theme2_text,
         free_text=free_text,
+        judge_eiso_texts=judge_eiso_texts,
     )
 
 if __name__ == "__main__":
