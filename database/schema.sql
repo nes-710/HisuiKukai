@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS contests (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    theme1 TEXT NOT NULL,
+    judge1 TEXT NOT NULL,
+    theme2 TEXT NOT NULL,
+    judge2 TEXT NOT NULL,
+    free_judge TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
