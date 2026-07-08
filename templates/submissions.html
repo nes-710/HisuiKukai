@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+投稿一覧
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ contest["contest_no"] }} 翡翠句会</h1>
+
+<h2>投稿一覧</h2>
+
+<table>
+
+<tr>
+
+<th>題</th>
+
+<th>作品</th>
+
+<th>筆名</th>
+
+</tr>
+
+{% for submission in submissions %}
+
+<tr>
+
+<td>
+
+{% if submission["theme"] == "theme1" %}
+
+{{ contest["theme1"] }}
+
+{% elif submission["theme"] == "theme2" %}
+
+{{ contest["theme2"] }}
+
+{% else %}
+
+雑詠
+
+{% endif %}
+
+</td>
+
+<td>{{ submission["poem"] }}</td>
+
+<td>{{ submission["pen_name"] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

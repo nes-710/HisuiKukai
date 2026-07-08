@@ -5,7 +5,11 @@ from services.contest_service import (
     get_contest,
     get_status_label,
 )
-from services.submission_service import create_submission, count_participants
+from services.submission_service import (
+    create_submission,
+    count_participants,
+    get_submissions,
+)
 
 app = Flask(__name__)
 
@@ -109,6 +113,19 @@ def submit_complete(contest_id):
     return render_template(
         "submit_complete.html",
         contest=contest,
+    )
+
+@app.route("/contest/<int:contest_id>/submissions")
+def submissions(contest_id):
+
+    contest = get_contest(contest_id)
+
+    submissions = get_submissions(contest_id)
+
+    return render_template(
+        "submissions.html",
+        contest=contest,
+        submissions=submissions,
     )
 
 if __name__ == "__main__":

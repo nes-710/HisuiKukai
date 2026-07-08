@@ -47,3 +47,33 @@ def count_participants(contest_id):
     conn.close()
 
     return count["count"]
+
+def get_submissions(contest_id):
+
+    conn = get_connection()
+
+    submissions = conn.execute(
+        """
+        SELECT
+
+            participants.pen_name,
+            participants.pen_name_kana,
+
+            submissions.theme,
+            submissions.poem
+
+        FROM submissions
+
+        JOIN participants
+        ON submissions.participant_id = participants.id
+
+        WHERE participants.contest_id = ?
+
+        ORDER BY participants.id
+        """,
+        (contest_id,),
+    ).fetchall()
+
+    conn.close()
+
+    return submissions
