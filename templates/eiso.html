@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+詠草
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ contest["contest_no"] }} 翡翠句会　詠草</h1>
+
+<h2>題①「{{ contest["theme1"] }}」</h2>
+
+{% for submission in submissions %}
+    {% if submission["theme"] == "theme1" %}
+        <p>{{ submission["poem"] }}</p>
+    {% endif %}
+{% endfor %}
+
+<hr>
+
+<h2>題②「{{ contest["theme2"] }}」</h2>
+
+{% for submission in submissions %}
+    {% if submission["theme"] == "theme2" %}
+        <p>{{ submission["poem"] }}</p>
+    {% endif %}
+{% endfor %}
+
+<hr>
+
+<h2>雑詠</h2>
+
+{% for submission in submissions %}
+    {% if submission["theme"] == "free" %}
+        <p>{{ submission["poem"] }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>
+<a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
+</p>
+
+{% endblock %}

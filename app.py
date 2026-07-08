@@ -10,6 +10,7 @@ from services.submission_service import (
     count_participants,
     get_submissions,
 )
+from services.eiso_service import get_eiso_data
 
 app = Flask(__name__)
 
@@ -124,6 +125,18 @@ def submissions(contest_id):
 
     return render_template(
         "submissions.html",
+        contest=contest,
+        submissions=submissions,
+    )
+
+@app.route("/contest/<int:contest_id>/eiso")
+def eiso(contest_id):
+
+    contest = get_contest(contest_id)
+    submissions = get_eiso_data(contest_id)
+
+    return render_template(
+        "eiso.html",
         contest=contest,
         submissions=submissions,
     )
