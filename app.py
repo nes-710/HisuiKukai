@@ -16,6 +16,7 @@ from services.eiso_service import (
     create_eiso_text,
     get_judge_eiso_texts,
 )
+from services.selection_service import analyze_selection_text
 
 app = Flask(__name__)
 
@@ -169,6 +170,27 @@ def eiso(contest_id):
         theme2_text=theme2_text,
         free_text=free_text,
         judge_eiso_texts=judge_eiso_texts,
+    )
+
+@app.route("/contest/<int:contest_id>/selection", methods=["GET", "POST"])
+def selection(contest_id):
+
+    contest = get_contest(contest_id)
+
+    matched = []
+    unmatched = []
+    raw_text = ""
+
+    if request.method == "POST":
+        raw_text = request.form["selection_text"]
+        matched, unmatched = analyze_selection_text(contest_id, raw_text)
+
+    return render_template(
+        "selection.html",
+        contest=contest,
+        matched=matched,
+        unmatched=unmatched,
+        raw_text=raw_text,
     )
 
 if __name__ == "__main__":

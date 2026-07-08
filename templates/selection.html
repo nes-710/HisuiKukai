@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+選句結果取り込み
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ contest["contest_no"] }} 翡翠句会</h1>
+
+<h2>選句結果取り込み</h2>
+
+<form method="post">
+
+<textarea name="selection_text" rows="20">{{ raw_text }}</textarea>
+
+<br>
+
+<input type="submit" value="解析する">
+
+</form>
+
+{% if matched %}
+
+<h2>照合できた句</h2>
+
+<ul>
+{% for item in matched %}
+<li>
+{{ item["poem"] }}　—　{{ item["pen_name"] }}
+</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+{% if unmatched %}
+
+<h2>照合できなかった行</h2>
+
+<ul>
+{% for line in unmatched %}
+<li>{{ line }}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+<p>
+<a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
+</p>
+
+{% endblock %}
