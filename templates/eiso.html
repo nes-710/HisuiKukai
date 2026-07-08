@@ -38,10 +38,21 @@
 
 <h3>{{ item["judge"] }}さん用：{{ item["theme_title"] }}</h3>
 
-<textarea rows="15" readonly>{{ item["text"] }}</textarea>
+<textarea id="judge-eiso-{{ loop.index }}" rows="15" readonly>{{ item["text"] }}</textarea>
+
+<button type="button" onclick="copyText('judge-eiso-{{ loop.index }}')">
+コピー
+</button>
 
 {% endfor %}
 
+<script>
+function copyText(id) {
+    const element = document.getElementById(id);
+    element.select();
+    document.execCommand("copy");
+}
+</script>
 
 <p>
 <a href="/contest/{{ contest['id'] }}">句会ダッシュボードへ戻る</a>
