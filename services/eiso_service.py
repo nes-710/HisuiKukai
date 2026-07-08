@@ -60,6 +60,12 @@ def create_eiso_text(title, poems):
 
     return "\n".join(lines)
 
+def shuffled_copy(poems):
+    copied = poems.copy()
+    random.shuffle(copied)
+    return copied
+
+
 def get_judge_eiso_texts(contest, grouped_eiso):
 
     judge_texts = []
@@ -69,7 +75,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "theme_title": contest["theme1"],
         "text": create_eiso_text(
             contest["theme1"],
-            grouped_eiso["theme1"],
+            shuffled_copy(grouped_eiso["theme1"]),
         ),
     })
 
@@ -78,7 +84,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "theme_title": contest["theme2"],
         "text": create_eiso_text(
             contest["theme2"],
-            grouped_eiso["theme2"],
+            shuffled_copy(grouped_eiso["theme2"]),
         ),
     })
 
@@ -87,7 +93,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "theme_title": "雑詠",
         "text": create_eiso_text(
             "雑詠",
-            grouped_eiso["free"],
+            shuffled_copy(grouped_eiso["free"]),
         ),
     })
 
@@ -96,7 +102,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "theme_title": "雑詠",
         "text": create_eiso_text(
             "雑詠",
-            grouped_eiso["free"],
+            shuffled_copy(grouped_eiso["free"]),
         ),
     })
 
