@@ -51,6 +51,8 @@ def create():
 
         free_judge = request.form["free_judge"]
 
+        deadline_at = request.form["deadline_at"]
+
         contest_id = create_contest(
             contest_no,
             theme1,
@@ -58,6 +60,7 @@ def create():
             theme2,
             judge2,
             free_judge,
+            deadline_at,
         )
 
         return redirect(
@@ -90,7 +93,7 @@ def submit(contest_id):
             "submit_closed.html",
             contest=contest,
         )
-    
+
     if request.method == "POST":
 
         pen_name = request.form["pen_name"]

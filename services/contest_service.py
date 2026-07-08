@@ -8,6 +8,7 @@ def create_contest(
     theme2,
     judge2,
     free_judge,
+    deadline_at,
 ):
 
     conn = get_connection()
@@ -15,8 +16,8 @@ def create_contest(
     cursor = conn.execute(
         """
         INSERT INTO contests
-        (contest_no, theme1, judge1, theme2, judge2, free_judge)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (contest_no, theme1, judge1, theme2, judge2, free_judge, deadline_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
         (
             contest_no,
@@ -25,6 +26,7 @@ def create_contest(
             theme2,
             judge2,
             free_judge,
+            deadline_at,
         ),
     )
 

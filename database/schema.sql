@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS contests (
     free_judge TEXT NOT NULL,
 
     status TEXT NOT NULL DEFAULT 'created',
+    deadline_at TEXT,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
