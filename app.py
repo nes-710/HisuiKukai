@@ -5,6 +5,7 @@ from services.contest_service import (
     get_contest,
     get_status_label,
 )
+from services.submission_service import create_submission
 
 app = Flask(__name__)
 
@@ -66,7 +67,31 @@ def submit(contest_id):
     contest = get_contest(contest_id)
 
     if request.method == "POST":
-        print(request.form)
+
+        pen_name = request.form["pen_name"]
+        pen_name_kana = request.form["pen_name_kana"]
+
+        poems = [
+            {"theme": "theme1", "text": request.form["theme1_poem1"]},
+            {"theme": "theme1", "text": request.form["theme1_poem2"]},
+            {"theme": "theme1", "text": request.form["theme1_poem3"]},
+
+            {"theme": "theme2", "text": request.form["theme2_poem1"]},
+            {"theme": "theme2", "text": request.form["theme2_poem2"]},
+            {"theme": "theme2", "text": request.form["theme2_poem3"]},
+
+            {"theme": "free", "text": request.form["free_poem1"]},
+            {"theme": "free", "text": request.form["free_poem2"]},
+            {"theme": "free", "text": request.form["free_poem3"]},
+        ]
+
+        create_submission(
+            contest_id,
+            pen_name,
+            pen_name_kana,
+            poems,
+        )
+
         return "投句を受け付けました。"
 
     return render_template(
