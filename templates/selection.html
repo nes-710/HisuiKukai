@@ -12,6 +12,16 @@
 
 <form method="post">
 
+<label>対象の題</label>
+
+<select name="theme">
+    <option value="theme1">題①「{{ contest["theme1"] }}」</option>
+    <option value="theme2">題②「{{ contest["theme2"] }}」</option>
+    <option value="free">雑詠</option>
+</select>
+
+<br><br>
+
 <textarea
     class="selection-textarea"
     name="selection_text"

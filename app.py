@@ -186,7 +186,8 @@ def selection(contest_id):
 
     if request.method == "POST":
         raw_text = request.form["selection_text"]
-        matched, unmatched = analyze_selection_text(contest_id, raw_text)
+        theme = request.form["theme"]
+        matched, unmatched = analyze_selection_text(contest_id, raw_text, theme)
         report_text = create_selection_report_text(matched)
 
     return render_template(

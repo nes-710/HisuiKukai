@@ -5,21 +5,27 @@ def normalize_text(text):
     return text.strip().replace("　", " ")
 
 
-def get_poem_lookup(contest_id):
+def get_poem_lookup(contest_id, theme=None):
     conn = get_connection()
 
-    rows = conn.execute(
-        """
+    sql = """
         SELECT
             submissions.poem,
+            submissions.theme,
             participants.pen_name
         FROM submissions
         JOIN participants
         ON submissions.participant_id = participants.id
         WHERE participants.contest_id = ?
-        """,
-        (contest_id,),
-    ).fetchall()
+    """
+
+    params = [contest_id]
+
+    if theme:
+        sql += " AND submissions.theme = ?"
+        params.append(theme)
+
+    rows = conn.execute(sql, params).fetchall()
 
     conn.close()
 
@@ -30,13 +36,14 @@ def get_poem_lookup(contest_id):
         lookup[key] = {
             "poem": row["poem"],
             "pen_name": row["pen_name"],
+            "theme": row["theme"],
         }
 
     return lookup
 
 
-def analyze_selection_text(contest_id, text):
-    lookup = get_poem_lookup(contest_id)
+def analyze_selection_text(contest_id, text, theme=None):
+    lookup = get_poem_lookup(contest_id, theme)
 
     current_rank = "平"
 
