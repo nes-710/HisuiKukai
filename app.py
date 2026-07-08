@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from services.contest_service import (
     create_contest,
     get_all_contests,
@@ -94,10 +94,20 @@ def submit(contest_id):
             poems,
         )
 
-        return "投句を受け付けました。"
+        return redirect(url_for("submit_complete", contest_id=contest_id))
 
     return render_template(
         "submit.html",
+        contest=contest,
+    )
+
+@app.route("/contest/<int:contest_id>/submit/complete")
+def submit_complete(contest_id):
+
+    contest = get_contest(contest_id)
+
+    return render_template(
+        "submit_complete.html",
         contest=contest,
     )
 
