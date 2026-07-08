@@ -3,7 +3,14 @@
 <html>
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <title>投句フォーム</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -68,6 +75,22 @@
 <input type="submit" value="投句する">
 
 </form>
+
+<script>
+document.querySelectorAll("textarea").forEach(function(textarea) {
+
+    textarea.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    });
+
+    textarea.addEventListener("input", function() {
+        this.value = this.value.replace(/\r?\n/g, "");
+    });
+
+});
+</script>
 
 </body>
 
