@@ -49,7 +49,7 @@ def create():
 
         free_judge = request.form["free_judge"]
 
-        create_contest(
+        contest_id = create_contest(
             contest_no,
             theme1,
             judge1,
@@ -58,7 +58,9 @@ def create():
             free_judge,
         )
 
-        return "保存しました！"
+        return redirect(
+            url_for("contest", contest_id=contest_id)
+        )
 
     return render_template("create.html")
 

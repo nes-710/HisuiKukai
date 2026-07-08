@@ -12,7 +12,7 @@ def create_contest(
 
     conn = get_connection()
 
-    conn.execute(
+    cursor = conn.execute(
         """
         INSERT INTO contests
         (contest_no, theme1, judge1, theme2, judge2, free_judge)
@@ -28,8 +28,12 @@ def create_contest(
         ),
     )
 
+    contest_id = cursor.lastrowid
+
     conn.commit()
     conn.close()
+
+    return contest_id
 
 def get_all_contests():
 
