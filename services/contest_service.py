@@ -46,3 +46,20 @@ def get_all_contests():
     conn.close()
 
     return contests
+
+def get_contest(contest_id):
+
+    conn = get_connection()
+
+    contest = conn.execute(
+        """
+        SELECT *
+        FROM contests
+        WHERE id = ?
+        """,
+        (contest_id,),
+    ).fetchone()
+
+    conn.close()
+
+    return contest

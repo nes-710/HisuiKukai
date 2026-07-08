@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request
-from services.contest_service import create_contest, get_all_contests
+from services.contest_service import (
+    create_contest,
+    get_all_contests,
+    get_contest,
+)
 
 app = Flask(__name__)
 
@@ -42,6 +46,15 @@ def create():
 
     return render_template("create.html")
 
+@app.route("/contest/<int:contest_id>")
+def contest(contest_id):
+
+    contest = get_contest(contest_id)
+
+    return render_template(
+        "contest.html",
+        contest=contest,
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
