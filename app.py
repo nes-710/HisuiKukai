@@ -177,6 +177,7 @@ def eiso(contest_id):
 
 @app.route("/contest/<int:contest_id>/selection", methods=["GET", "POST"])
 def selection(contest_id):
+    selected_theme = "theme1"
     report_text = ""
     contest = get_contest(contest_id)
 
@@ -186,8 +187,8 @@ def selection(contest_id):
 
     if request.method == "POST":
         raw_text = request.form["selection_text"]
-        theme = request.form["theme"]
-        matched, unmatched = analyze_selection_text(contest_id, raw_text, theme)
+        selected_theme = request.form["theme"]
+        matched, unmatched = analyze_selection_text(contest_id, raw_text, selected_theme)
         report_text = create_selection_report_text(matched)
 
     return render_template(
@@ -197,6 +198,7 @@ def selection(contest_id):
         unmatched=unmatched,
         raw_text=raw_text,
         report_text=report_text,
+        selected_theme=selected_theme,
     )
 
 if __name__ == "__main__":

@@ -15,9 +15,17 @@
 <label>対象の題</label>
 
 <select name="theme">
-    <option value="theme1">題①「{{ contest["theme1"] }}」</option>
-    <option value="theme2">題②「{{ contest["theme2"] }}」</option>
-    <option value="free">雑詠</option>
+    <option value="theme1" {% if selected_theme == "theme1" %}selected{% endif %}>
+        題①「{{ contest["theme1"] }}」
+    </option>
+
+    <option value="theme2" {% if selected_theme == "theme2" %}selected{% endif %}>
+        題②「{{ contest["theme2"] }}」
+    </option>
+
+    <option value="free" {% if selected_theme == "free" %}selected{% endif %}>
+        雑詠
+    </option>
 </select>
 
 <br><br>
