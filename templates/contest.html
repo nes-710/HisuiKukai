@@ -29,13 +29,27 @@
 
 <form method="post" action="/contest/{{ contest['id'] }}/status">
 
-    <select name="status">
-        <option value="created">作成済み</option>
-        <option value="accepting">投句受付中</option>
-        <option value="closed">投句締切</option>
-        <option value="selection">選句期間中</option>
-        <option value="finished">終了</option>
-    </select>
+<select name="status">
+    <option value="created" {% if contest["status"] == "created" %}selected{% endif %}>
+        作成済み
+    </option>
+
+    <option value="accepting" {% if contest["status"] == "accepting" %}selected{% endif %}>
+        投句受付中
+    </option>
+
+    <option value="closed" {% if contest["status"] == "closed" %}selected{% endif %}>
+        投句締切
+    </option>
+
+    <option value="selection" {% if contest["status"] == "selection" %}selected{% endif %}>
+        選句期間中
+    </option>
+
+    <option value="finished" {% if contest["status"] == "finished" %}selected{% endif %}>
+        終了
+    </option>
+</select>
 
     <button type="submit">
         状態を変更
