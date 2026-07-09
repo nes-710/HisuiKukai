@@ -24,6 +24,17 @@ def get_eiso_data(contest_id):
 
     return submissions
 
+def unique_poems(poems):
+    result = []
+    seen = set()
+
+    for poem in poems:
+        if poem not in seen:
+            result.append(poem)
+            seen.add(poem)
+
+    return result
+
 def group_and_shuffle_eiso(submissions):
 
     grouped = {
@@ -36,26 +47,29 @@ def group_and_shuffle_eiso(submissions):
         grouped[submission["theme"]].append(submission["poem"])
 
     for theme in grouped:
+        grouped[theme] = unique_poems(grouped[theme])
         random.shuffle(grouped[theme])
 
     return grouped
 
-def create_eiso_text(title, poems):
+def create_eiso_text(title, poems, exclude_count=0):
 
-    count = len(poems)
+    count = len(poems) - exclude_count
 
-    minimum = math.ceil(count * 0.4)
-    maximum = math.floor(count * 0.5)
+    if count < 0:
+        count = 0
+
+    minimum = math.floor(count * 0.4)
+    maximum = math.ceil(count * 0.5)
 
     lines = []
 
     lines.append(f'題「{title}」の投句一覧をお送りします。')
     lines.append(
-        f'計{count}句あるので{minimum}～{maximum}句（40～50%）を抜いて頂ければと思います。よろしくお願いします。'
+        f'選者様の句を除き、計{count}句あるので{minimum}～{maximum}句（約40～50%）を抜いて頂ければと思います。よろしくお願いします。'
     )
 
     lines.append("")
-
     lines.extend(poems)
 
     return "\n".join(lines)
@@ -76,6 +90,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "text": create_eiso_text(
             contest["theme1"],
             shuffled_copy(grouped_eiso["theme1"]),
+            exclude_count=1,
         ),
     })
 
@@ -85,6 +100,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "text": create_eiso_text(
             contest["theme2"],
             shuffled_copy(grouped_eiso["theme2"]),
+            exclude_count=1,
         ),
     })
 
@@ -94,6 +110,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "text": create_eiso_text(
             "雑詠",
             shuffled_copy(grouped_eiso["free"]),
+            exclude_count=3,
         ),
     })
 
@@ -103,6 +120,7 @@ def get_judge_eiso_texts(contest, grouped_eiso):
         "text": create_eiso_text(
             "雑詠",
             shuffled_copy(grouped_eiso["free"]),
+            exclude_count=3,
         ),
     })
 
