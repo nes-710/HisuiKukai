@@ -17,6 +17,18 @@ def add_column_if_missing(conn, table_name, column_name, column_definition):
         print(f"既に存在します: {table_name}.{column_name}")
 
 
+def create_settings_table_if_missing(conn):
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS app_settings (
+            key TEXT PRIMARY KEY,
+            value TEXT NOT NULL
+        )
+        """
+    )
+    print("確認しました: app_settings")
+
+
 def main():
     conn = sqlite3.connect(DATABASE)
 
@@ -26,6 +38,8 @@ def main():
         "deadline_at",
         "TEXT",
     )
+
+    create_settings_table_if_missing(conn)
 
     conn.commit()
     conn.close()

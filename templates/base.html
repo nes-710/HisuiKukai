@@ -35,6 +35,14 @@ HisuiKukai
 
 <body>
 
+{% if session.get("admin_authenticated") %}
+<form method="post" action="/admin/logout" class="admin-logout">
+    <button type="submit">
+        ログアウト
+    </button>
+</form>
+{% endif %}
+
 {% block content %}
 {% endblock %}
 

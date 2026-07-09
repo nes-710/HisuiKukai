@@ -46,6 +46,15 @@ input[type="text"]{
     padding:8px;
 }
 
+input[type="password"]{
+
+    width:100%;
+
+    font-size:16px;
+
+    padding:8px;
+}
+
 input[type="submit"]{
 
     padding:10px 30px;
@@ -109,4 +118,12 @@ textarea[readonly] {
     max-width: 700px;
     padding: 8px;
     font-size: 15px;
+}
+
+.admin-logout {
+    text-align: right;
+}
+
+.admin-logout button {
+    padding: 6px 14px;
 }

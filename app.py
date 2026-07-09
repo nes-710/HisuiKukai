@@ -1,5 +1,5 @@
 from database import DATABASE
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, send_file, session, flash
 import os
 import shutil
 from services.contest_service import (
@@ -27,8 +27,103 @@ from services.selection_service import (
     analyze_selection_text,
     create_selection_report_text,
 )
+from services.admin_service import (
+    change_admin_password,
+    check_admin_password,
+)
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("HISUI_SECRET_KEY", "hisui-kukai-dev-secret")
+
+PUBLIC_ENDPOINTS = {
+    "admin_login",
+    "submit",
+    "submit_complete",
+    "static",
+}
+
+
+def get_safe_next_url():
+
+    next_url = request.values.get("next") or url_for("index")
+
+    if not next_url.startswith("/") or next_url.startswith("//"):
+        return url_for("index")
+
+    return next_url
+
+
+@app.before_request
+def require_admin_password():
+
+    if request.endpoint in PUBLIC_ENDPOINTS:
+        return
+
+    if session.get("admin_authenticated"):
+        return
+
+    next_url = request.full_path if request.query_string else request.path
+
+    return redirect(
+        url_for("admin_login", next=next_url)
+    )
+
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+
+    error = ""
+    next_url = get_safe_next_url()
+
+    if request.method == "POST":
+        password = request.form["password"]
+
+        if check_admin_password(password):
+            session["admin_authenticated"] = True
+            return redirect(next_url)
+
+        error = "パスワードが違います。"
+
+    return render_template(
+        "login.html",
+        error=error,
+        next_url=next_url,
+    )
+
+
+@app.route("/admin/logout", methods=["POST"])
+def admin_logout():
+
+    session.pop("admin_authenticated", None)
+
+    return redirect(url_for("admin_login"))
+
+
+@app.route("/admin/password", methods=["POST"])
+def update_admin_password():
+
+    current_password = request.form["current_password"]
+    new_password = request.form["new_password"].strip()
+    new_password_confirm = request.form["new_password_confirm"].strip()
+
+    if not check_admin_password(current_password):
+        flash("現在のパスワードが違います。")
+        return redirect(url_for("index"))
+
+    if not new_password:
+        flash("新しいパスワードを入力してください。")
+        return redirect(url_for("index"))
+
+    if new_password != new_password_confirm:
+        flash("新しいパスワードが一致しません。")
+        return redirect(url_for("index"))
+
+    change_admin_password(new_password)
+    session["admin_authenticated"] = True
+
+    flash("管理パスワードを変更しました。")
+
+    return redirect(url_for("index"))
 
 
 @app.route("/")

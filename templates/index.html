@@ -8,6 +8,10 @@ HisuiKukai
 
 <h1>翡翠句会</h1>
 
+{% for message in get_flashed_messages() %}
+<p class="note">{{ message }}</p>
+{% endfor %}
+
 <p>
 <a href="/create">
 新しい句会を作成
@@ -62,6 +66,39 @@ HisuiKukai
 
     <button type="submit">
         復元する
+    </button>
+
+</form>
+
+<hr>
+
+<h2>管理パスワード変更</h2>
+
+<form method="post" action="/admin/password">
+
+    <label>
+        現在のパスワード
+        <input type="password" name="current_password" required>
+    </label>
+
+    <br><br>
+
+    <label>
+        新しいパスワード
+        <input type="password" name="new_password" required>
+    </label>
+
+    <br><br>
+
+    <label>
+        新しいパスワード（確認）
+        <input type="password" name="new_password_confirm" required>
+    </label>
+
+    <br><br>
+
+    <button type="submit">
+        パスワードを変更
     </button>
 
 </form>

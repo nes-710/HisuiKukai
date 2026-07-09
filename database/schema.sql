@@ -43,3 +43,8 @@ CREATE TABLE IF NOT EXISTS submissions (
 
     FOREIGN KEY(participant_id) REFERENCES participants(id)
 );
+
+CREATE TABLE IF NOT EXISTS app_settings (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+);
